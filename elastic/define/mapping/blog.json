@@ -1,0 +1,46 @@
+{
+  "settings": {
+    "analysis": {
+      "tokenizer": {
+        "ja_tokenizer": {
+          "type": "kuromoji_tokenizer",
+          "mode": "search"
+        }
+      },
+      "analyzer": {
+        "ja_analyzer": {
+          "type": "custom",
+          "tokenizer": "ja_tokenizer",
+          "char_filter": [
+            "kuromoji_iteration_mark"
+          ],
+          "filter": [
+            "lowercase",
+            "cjk_width",
+            "kuromoji_part_of_speech"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "dynamic": "strict",
+    "properties": {
+      "title": {
+        "type": "text",
+        "analyzer": "ja_analyzer"
+      },
+      "content": {
+        "type": "text",
+        "analyzer": "ja_analyzer"
+      },
+      "categories": {
+        "type": "keyword"
+      },
+      "published_at": {
+        "type": "date",
+        "format": "date_time_no_millis"
+      }
+    }
+  }
+}
